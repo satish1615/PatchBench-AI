@@ -1,0 +1,14 @@
+{
+  "name": "patchbench-ai",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline-first coding-agent benchmark task validation application",
+  "scripts": {
+    "test": "node --test",
+    "serve": "python3 -m http.server 8080",
+    "check": "node --check app.js && node --check src/validator.js && node --check src/zip.js && node --test"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT"
+}

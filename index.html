@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101f32" />
+  <meta name="description" content="PatchBench AI: offline-first, browser-based software engineering benchmark task validator." />
+  <title>PatchBench AI | Benchmark Quality Workspace</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="#dashboard" data-view="dashboard" aria-label="PatchBench AI home">
+      <span class="brand-logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m9 6 7 5-7 5 7 5-7 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/><path d="M21 8h4v16h-4" fill="none" stroke="#78e5cb" stroke-width="3" stroke-linecap="round" /></svg></span>
+      <span><strong>PatchBench<span class="brand-accent">AI</span></strong><small>SWE quality workspace</small></span>
+    </a>
+    <div class="sidebar-label">WORKSPACE</div>
+    <nav class="nav" aria-label="Workspace">
+      <button data-view="dashboard" class="nav-item active" aria-current="page"><span class="nav-icon">▦</span> Overview</button>
+      <button data-view="validator" class="nav-item"><span class="nav-icon">◇</span> Task validator</button>
+      <button data-view="standards" class="nav-item"><span class="nav-icon">▤</span> Validation rules</button>
+      <button data-view="history" class="nav-item"><span class="nav-icon">◷</span> Session history</button>
+    </nav>
+    <div class="side-bottom">
+      <div class="privacy"><span class="privacy-dot"></span><strong>Local-first processing</strong><p>Files are reviewed inside your browser. Nothing is uploaded to a server.</p></div>
+      <a class="github-link" href="https://github.com/satish1615/PatchBench-AI" target="_blank" rel="noopener noreferrer">Source on GitHub <span aria-hidden="true">↗</span></a>
+      <div class="build-id">PATCHBENCH / VALIDATOR V1.1</div>
+    </div>
+  </aside>
+  <main id="main" class="main">
+    <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong id="crumb">Overview</strong></div><div class="top-actions"><span class="status-pill"><span class="status-dot"></span> Browser-only</span><button class="help-button" id="help-button" title="Quick start" aria-label="Show quick start guide">?</button></div></header>
+    <section id="dashboard" class="view is-active" aria-labelledby="dashboard-title">
+      <div class="hero"><div class="hero-copy"><div class="eyebrow"><span class="eyebrow-mark"></span> AUTOMATED BENCHMARK REVIEW</div><h1 id="dashboard-title">Ship better coding<br/><em>evaluation tasks.</em></h1><p>Catch broken task packages before they reach your coding agents. Inspect repository states, patch targets, test references, and offline runner readiness in one workspace.</p><div class="hero-buttons"><button class="btn btn-primary" data-action="open-validator">Validate a task <span aria-hidden="true">↗</span></button><button class="btn btn-ghost" data-action="load-valid">Try a sample task <span aria-hidden="true">→</span></button></div></div><div class="hero-art" aria-hidden="true"><div class="art-grid"></div><div class="float-card float-card-top"><span class="float-icon">{ }</span><span><b>Repository diff</b><small>Only approved changes</small></span><span class="float-check">✓</span></div><div class="code-card"><div class="code-title"><span>client.py</span><span class="code-points">● ● ●</span></div><div class="code-line"><i>12</i> <span>def fetch(session, url):</span></div><div class="code-line code-muted"><i>13</i> <span>    response = session.get(url)</span></div><div class="code-line added"><i>14</i> <span>+   if response.status_code == 503:</span></div><div class="code-line added"><i>15</i> <span>+       return retry(session, url)</span></div><div class="code-line code-muted"><i>16</i> <span>    return response</span></div></div><div class="float-card float-card-bottom"><span class="float-icon peach">▣</span><span><b>Test inventory</b><small>4 tests matched</small></span><span class="float-check">✓</span></div></div></div>
+      <div class="metric-grid"><div class="metric"><span>01 /</span><strong>State integrity</strong><p>Detect unintended edits to non-target files.</p></div><div class="metric"><span>02 /</span><strong>Target precision</strong><p>Validate symbol bodies, anchors and whole-file edits.</p></div><div class="metric"><span>03 /</span><strong>Test coverage</strong><p>Check qualified test IDs and declared test inventory.</p></div><div class="metric"><span>04 /</span><strong>Runner readiness</strong><p>Spot risky online or nondeterministic test patterns.</p></div></div>
+      <div class="section-head"><div><div class="section-kicker">START HERE</div><h2>Explore with an example</h2><p>Start with a known-good package, then compare a deliberately broken task.</p></div></div>
+      <div class="sample-grid"><button class="sample-card" data-action="load-valid"><span class="sample-icon green">✓</span><span><strong>Reference benchmark</strong><small>Python · Function body · 3 source files</small><span class="sample-desc">A controlled retry-policy change with consistent context and named regression tests.</span></span><span class="sample-arrow">↗</span></button><button class="sample-card" data-action="load-invalid"><span class="sample-icon orange">!</span><span><strong>Broken benchmark</strong><small>Python · Intentional validation mistakes</small><span class="sample-desc">Unexpected file edits, missing context entries, and invalid test references.</span></span><span class="sample-arrow">↗</span></button></div>
+    </section>
+    <section id="validator" class="view" aria-labelledby="validator-title"><div class="page-head"><div><div class="section-kicker">BENCHMARK QUALITY GATE</div><h1 id="validator-title">Task validator<span class="title-dot">.</span></h1><p>Upload a benchmark ZIP or open an example. Your source stays on this device.</p></div><span class="mini-tag">SAFE STATIC ANALYSIS</span></div>
+      <div class="validator-layout"><div class="left-stack"><div class="panel upload-panel"><div class="panel-head"><span class="step">01</span><h2>Task input</h2></div><input id="zip-input" type="file" accept=".zip,application/zip" hidden /><div id="dropzone" class="dropzone" role="button" tabindex="0" aria-label="Upload ZIP benchmark task"><div class="upload-glyph">↑</div><strong>Drop your benchmark ZIP here</strong><p>or click to browse from your device</p><small>ZIP only · max 12 MB · 300 entries · no files leave your browser</small></div><div class="sample-options"><span>OR TRY A DEMO</span><div class="inline-actions"><button class="small-btn" data-action="load-valid">✓ Valid task</button><button class="small-btn secondary" data-action="load-invalid">! Broken task</button></div></div><div id="package-information" class="package-information" hidden></div></div>
+        <div class="panel guide-panel"><div class="panel-head"><span class="step">02</span><h2>What gets checked</h2></div><div class="check-row"><span>✓</span><div><strong>Before / after states</strong><small>Only declared target paths may change</small></div></div><div class="check-row"><span>✓</span><div><strong>Region & context accuracy</strong><small>Precise editing boundaries and file inventories</small></div></div><div class="check-row"><span>✓</span><div><strong>Named regression tests</strong><small>Resolvable test identifiers and missing coverage</small></div></div><div class="check-row"><span>✓</span><div><strong>Execution risk</strong><small>Unsafe paths, network patterns and missing runner setup</small></div></div></div></div>
+      <div class="right-stack"><div id="empty-state" class="panel empty-state"><div class="empty-symbol">{ ✓ }</div><h2>Ready to inspect</h2><p>Choose one of the example benchmarks or upload your own package to see validation findings, changed files and downloadable results.</p><button class="btn btn-primary" data-action="load-valid">Run sample validation ↗</button></div>
+        <div id="results" hidden><div class="panel report-summary"><div class="report-top"><div><span class="section-kicker">VALIDATION REPORT</span><h2 id="task-title">Task title</h2><p id="task-subtitle">Package details</p></div><span id="report-badge" class="report-badge">Pending</span></div><div class="report-stats"><div><span id="stat-errors">0</span><small>Errors</small></div><div><span id="stat-warnings">0</span><small>Warnings</small></div><div><span id="stat-checks">0</span><small>Checks passed</small></div><div><span id="stat-files">0</span><small>Source files</small></div></div><div class="result-actions"><button id="download-json" class="small-btn">↓ Export JSON</button><button id="download-md" class="small-btn secondary">↓ Export Markdown</button></div></div>
+        <div class="panel findings-panel"><div class="panel-head between"><h2>Review findings <span id="findings-count" class="count"></span></h2><div class="filter-row" aria-label="Finding filters"><button data-filter="all" class="filter active">All</button><button data-filter="error" class="filter">Errors</button><button data-filter="warning" class="filter">Warnings</button><button data-filter="pass" class="filter">Passed</button></div></div><div id="findings-list" class="findings-list" aria-live="polite"></div></div>
+        <div class="panel file-panel"><div class="panel-head"><h2>Repository changes</h2></div><div id="changes-list" class="changes-list"></div><p class="footnote">Structural inspection only. This browser app does not run untrusted code or prove fail-to-pass execution.</p></div></div></div></div>
+    </section>
+    <section id="standards" class="view" aria-labelledby="standards-title"><div class="page-head"><div><div class="section-kicker">REFERENCE</div><h1 id="standards-title">Validation rules<span class="title-dot">.</span></h1><p>Know exactly what this tool verifies and what still needs a real test runner.</p></div></div><div class="standards-grid" id="standards-grid"></div><div class="panel spec-panel"><h2>Expected ZIP structure</h2><pre>benchmark-task.zip
+├── task.json
+├── states/
+│   ├── before/       # original source files
+│   └── after/        # approved result files
+├── tests/
+│   ├── fail2pass/    # focused regression tests
+│   └── pass2pass/    # behavior preservation tests
+├── Dockerfile        # optional, recommended
+└── test.sh           # optional, recommended</pre><p>The browser checks repository layout, file changes and declared test names. Use a separately isolated CI/container runner to verify actual behavior offline.</p><button class="small-btn" id="download-spec">↓ Download specification example</button></div></section>
+    <section id="history" class="view" aria-labelledby="history-title"><div class="page-head"><div><div class="section-kicker">THIS SESSION</div><h1 id="history-title">Run history<span class="title-dot">.</span></h1><p>Recent validations in this browser tab. No external storage or tracking.</p></div></div><div class="panel history-panel"><div id="history-content" class="history-list"><div class="history-empty">No validations yet. Open a sample to get started.</div></div></div></section>
+    <footer>PatchBench AI · Open-source developer tooling · For benchmark authors, reviewers and AI coding-agent researchers</footer>
+  </main>
+</div>
+<dialog id="help-dialog" class="help-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close help">×</button></form><span class="section-kicker">QUICK START</span><h2>Welcome to PatchBench AI</h2><p>Validate benchmark packages before you submit them to a coding-agent evaluation pipeline.</p><ol><li><b>Choose a sample</b> to see the checks in action, including a deliberately broken task.</li><li><b>Upload a ZIP</b> containing task.json and matching before/after source files.</li><li><b>Review findings</b>, correct issues and download a portable report.</li></ol><p class="dialog-note">Privacy: validation runs locally in your browser. The tool does not execute code, contact an LLM or upload files.</p><form method="dialog"><button class="btn btn-primary">Got it</button></form></dialog>
+</body>
+</html>

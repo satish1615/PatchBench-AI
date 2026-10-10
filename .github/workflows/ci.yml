@@ -1,0 +1,19 @@
+name: Static app checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python3 examples/create_samples.py
+      - run: npm run check
+      - name: Install pytest for trusted fixture checks
+        run: python3 -m pip install pytest==8.3.5
+      - name: Validate sample benchmark archives
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v

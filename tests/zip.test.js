@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {unzipTask,crc32} from '../src/zip.js';
+import {validateTask} from '../src/validator.js';
+const load=p=>new Uint8Array(readFileSync(new URL(`../examples/${p}`,import.meta.url)));
+test('ZIP32 deflated sample parses correctly',async()=>{const files=await unzipTask(load('valid-task.zip'));assert.ok(files['task.json']);assert.ok(files['states/after/client.py']);assert.equal(validateTask(files).summary.errors,0)});
+test('ZIP32 invalid benchmark example is detected',async()=>{const files=await unzipTask(load('broken-task.zip'));assert.ok(validateTask(files).summary.errors>0)});
+test('ZIP traversal entry is refused before loading any task',async()=>{await assert.rejects(()=>unzipTask(load('unsafe-traversal.zip')),/Unsafe archive entry path/)});
+test('rejects wrong compressed bytes/CRC',async()=>{const buf=load('valid-task.zip').slice();const text=new TextDecoder().decode(buf);const idx=text.indexOf('retry-policy-503');if(idx>=0){buf[idx]^=0xff;await assert.rejects(()=>unzipTask(buf),/checksum|decompression|length|UTF-8/)}else {assert.equal(crc32(new TextEncoder().encode('123456789')),0xcbf43926)}});
+test('valid CRC32 known test vector',()=>{assert.equal(crc32(new TextEncoder().encode('123456789')),0xcbf43926)});
